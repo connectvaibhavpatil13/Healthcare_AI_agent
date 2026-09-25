@@ -1,7 +1,14 @@
+from langchain_core.tools import tool
+
 from app.services.sql_service import execute_query
 
-
+@tool
 def get_department_patient_volume():
+    """
+    Get patient visit volume for each hospital department.
+    Use this when the user asks about department-wise patient volume.
+    """
+
     query = """
         SELECT
             d.Department_Name,
