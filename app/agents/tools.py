@@ -37,3 +37,39 @@ def get_total_patient_count():
     """
 
     return execute_query(query)
+
+@tool
+def get_appointment_status():
+    """
+    Get the number of appointments for each appointment status.
+    Use this when the user asks about appointment status,
+    such as completed, cancelled, pending, or scheduled appointments.
+    """
+
+    query = """
+        SELECT
+            Appointment_Status,
+            COUNT(*) AS total
+        FROM appointments
+        GROUP BY Appointment_Status
+        ORDER BY total DESC
+    """
+
+    return execute_query(query)
+@tool
+def get_monthly_appointments():
+    """
+    Get the total number of appointments for each month.
+    Use this when the user asks about monthly appointment trends.
+    """
+
+    query = """
+        SELECT
+            DATE_FORMAT(Appointment_Date, '%Y-%m') AS month,
+            COUNT(*) AS total_appointments
+        FROM appointments
+        GROUP BY DATE_FORMAT(Appointment_Date, '%Y-%m')
+        ORDER BY month
+    """
+
+    return execute_query(query)

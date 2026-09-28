@@ -2,8 +2,7 @@ from app.agents.agent import agent
 
 
 questions = [
-    "How many patients are registered in the hospital?",
-    "Which department has the highest patient volume?"
+    "How many appointments were there each month?"
 ]
 
 
