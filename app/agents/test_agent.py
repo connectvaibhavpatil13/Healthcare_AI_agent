@@ -2,9 +2,8 @@ from app.agents.agent import agent
 
 
 questions = [
-    "How many appointments were there each month?"
+    "Which department has the highest patient volume, and what should the hospital do about it?"
 ]
-
 
 for question in questions:
     result = agent.invoke({

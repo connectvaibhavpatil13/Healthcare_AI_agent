@@ -1,6 +1,7 @@
 from langchain_core.tools import tool
-
 from app.services.sql_service import execute_query
+from app.services.decision_service import generate_recommendation
+
 
 @tool
 def get_department_patient_volume():
@@ -73,3 +74,12 @@ def get_monthly_appointments():
     """
 
     return execute_query(query)
+
+@tool
+def get_decision_recommendation(question: str, analysis: str):
+    """
+    Generate a business insight and recommendation based on an analytical result.
+    Use this when the user asks for recommendations or decision support.
+    """
+
+    return generate_recommendation(question, analysis)
