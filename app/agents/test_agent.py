@@ -1,8 +1,9 @@
 from app.agents.agent import agent
 
 
+
 questions = [
-    "Which department has the highest patient volume, and what should the hospital do about it?"
+    "Which department has the highest patient volume, how does its waiting time compare with other departments, and what should management investigate before making a recommendation?"
 ]
 
 for question in questions:
@@ -17,3 +18,4 @@ for question in questions:
 
     print("\nQuestion:", question)
     print("Answer:", result["messages"][-1].content)
+

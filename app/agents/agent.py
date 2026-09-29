@@ -6,7 +6,9 @@ from app.agents.tools import (
     get_total_patient_count,
     get_appointment_status,
     get_monthly_appointments,
-    get_decision_recommendation
+    get_decision_recommendation,
+    get_average_waiting_time,
+    get_department_average_waiting_time
 )
 
 
@@ -15,7 +17,9 @@ tools = [
     get_total_patient_count,
     get_appointment_status,
     get_monthly_appointments,
-    get_decision_recommendation
+    get_decision_recommendation,
+    get_average_waiting_time,
+    get_department_average_waiting_time
 ]
 
 agent = create_agent(

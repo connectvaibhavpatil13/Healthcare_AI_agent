@@ -83,3 +83,40 @@ def get_decision_recommendation(question: str, analysis: str):
     """
 
     return generate_recommendation(question, analysis)
+
+@tool
+def get_average_waiting_time():
+    """
+    Get the average appointment waiting time.
+    Use this when evaluating operational pressure or patient waiting experience.
+    """
+
+    query = """
+        SELECT
+            AVG(Waiting_Time_Min) AS average_waiting_time_minutes
+        FROM appointments
+        WHERE Waiting_Time_Min IS NOT NULL
+    """
+
+    return execute_query(query)
+
+@tool
+def get_department_average_waiting_time():
+    """
+    Get the average appointment waiting time for each hospital department.
+    Use this when comparing department-level patient volume with waiting time.
+    """
+    query = """
+        SELECT
+            d.Department_Name,
+            AVG(a.Waiting_Time_Min) AS average_waiting_time_minutes
+        FROM appointments a
+        JOIN doctors doc
+            ON a.Doctor_ID = doc.Doctor_ID
+        JOIN departments d
+            ON doc.Department_ID = d.Department_ID
+        WHERE a.Waiting_Time_Min IS NOT NULL
+        GROUP BY d.Department_ID, d.Department_Name
+        ORDER BY average_waiting_time_minutes DESC
+    """
+    return execute_query(query)
