@@ -107,16 +107,19 @@ def get_department_average_waiting_time():
     Use this when comparing department-level patient volume with waiting time.
     """
     query = """
-        SELECT
-            d.Department_Name,
-            AVG(a.Waiting_Time_Min) AS average_waiting_time_minutes
-        FROM appointments a
-        JOIN doctors doc
-            ON a.Doctor_ID = doc.Doctor_ID
-        JOIN departments d
-            ON doc.Department_ID = d.Department_ID
-        WHERE a.Waiting_Time_Min IS NOT NULL
-        GROUP BY d.Department_ID, d.Department_Name
-        ORDER BY average_waiting_time_minutes DESC
-    """
+    SELECT
+        d.Department_Name,
+        AVG(a.Waiting_Time_Min) AS average_waiting_time_minutes,
+        RANK() OVER (
+            ORDER BY AVG(a.Waiting_Time_Min) DESC
+        ) AS waiting_time_rank
+    FROM appointments a
+    JOIN doctors doc
+        ON a.Doctor_ID = doc.Doctor_ID
+    JOIN departments d
+        ON doc.Department_ID = d.Department_ID
+    WHERE a.Waiting_Time_Min IS NOT NULL
+    GROUP BY d.Department_ID, d.Department_Name
+    ORDER BY average_waiting_time_minutes DESC
+"""
     return execute_query(query)

@@ -16,11 +16,22 @@ Analytical result:
 {analysis}
 
 Based only on the analytical result, provide:
-1. A short business insight.
-2. One or two practical recommendations.
 
-Do not invent facts that are not present in the analytical result.
-Clearly distinguish the observed result from the recommendation.
+1. Observed findings:
+   - State only facts directly supported by the analytical result.
+   - Include the relevant numbers.
+
+2. Interpretation:
+   - Explain what the findings may indicate.
+   - Clearly label interpretations as interpretations.
+   - Do not present assumptions as facts.
+
+3. Recommendations:
+   - Give one or two practical actions or investigations.
+   - Recommendations must be justified by the available evidence.
+   - If the available data is insufficient for a strong recommendation, say what additional data should be investigated.
+
+Do not invent facts, causes, trends, or operational conditions that are not present in the analytical result.
 """
 
     response = llm.invoke(prompt)
